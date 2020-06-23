@@ -3,9 +3,8 @@ package cn.sciento.fluorite.api.account;
 import cn.sciento.fluorite.api.AbstractAPI;
 import cn.sciento.fluorite.constants.ServerConstant;
 import cn.sciento.fluorite.http.HttpPostMethod;
-import cn.sciento.fluorite.request.PutPermStatementVO;
+import cn.sciento.fluorite.request.PutPolicyVO;
 import cn.sciento.fluorite.response.BasicResponse;
-import cn.sciento.fluorite.utils.DigestUtils;
 import cn.sciento.fluorite.utils.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.http.HttpResponse;
@@ -21,7 +20,7 @@ import java.util.Map;
  * Api文档:http://open.ys7.com/doc/zh/book/index/account-api.html
  *
  */
-public class PutAccountPermStatementApi extends AbstractAPI {
+public class PutAccountPolicyApi extends AbstractAPI {
     /**
      * 子账号id
      */
@@ -43,16 +42,16 @@ public class PutAccountPermStatementApi extends AbstractAPI {
      * @param devNumList ["469631729"]
      * @param camNumList ["544229080"]
      */
-    public PutAccountPermStatementApi(String accessToken, String accountId, String permission, List<String> devNumList,List<String> camNumList) {
-        this.url = ServerConstant.PUT_ACCOUNT_STATEMENT;
+    public PutAccountPolicyApi(String accessToken, String accountId, String permission, List<String> devNumList, List<String> camNumList) {
+        this.url = ServerConstant.PUT_ACCOUNT_POLICY;
         this.accessToken = accessToken;
         this.accountId = accountId;
-        PutPermStatementVO putPermStatementVO = new PutPermStatementVO();
-        PutPermStatementVO.StatementBean statementBean = createStatementBean(permission, devNumList, camNumList);
-        List<PutPermStatementVO.StatementBean> statementList = new ArrayList<>();
+        PutPolicyVO putPolicyVO = new PutPolicyVO();
+        PutPolicyVO.StatementBean statementBean = createStatementBean(permission, devNumList, camNumList);
+        List<PutPolicyVO.StatementBean> statementList = new ArrayList<>();
         statementList.add(statementBean);
-        putPermStatementVO.setStatement(statementList);
-        this.policy = JSON.toJSONString(putPermStatementVO);
+        putPolicyVO.setStatement(statementList);
+        this.policy = JSON.toJSONString(putPolicyVO);
         HttpUtil httpUtil = new HttpUtil();
         Map<String,Object> headMap = httpUtil.setHeadMap(host,contentType);
         httpMethod = new HttpPostMethod(method);
@@ -70,13 +69,13 @@ public class PutAccountPermStatementApi extends AbstractAPI {
         httpMethod.setCompleteUrl(url,params);
     }
 
-    public PutAccountPermStatementApi(String accessToken, String accountId,  List<PutPermStatementVO.StatementBean> statementList) {
-        this.url = ServerConstant.PUT_ACCOUNT_STATEMENT;
+    public PutAccountPolicyApi(String accessToken, String accountId, List<PutPolicyVO.StatementBean> statementList) {
+        this.url = ServerConstant.PUT_ACCOUNT_POLICY;
         this.accessToken = accessToken;
         this.accountId = accountId;
-        PutPermStatementVO putPermStatementVO = new PutPermStatementVO();
-        putPermStatementVO.setStatement(statementList);
-        this.policy = JSON.toJSONString(putPermStatementVO);
+        PutPolicyVO putPolicyVO = new PutPolicyVO();
+        putPolicyVO.setStatement(statementList);
+        this.policy = JSON.toJSONString(putPolicyVO);
         HttpUtil httpUtil = new HttpUtil();
         Map<String,Object> headMap = httpUtil.setHeadMap(host,contentType);
         httpMethod = new HttpPostMethod(method);
@@ -94,8 +93,8 @@ public class PutAccountPermStatementApi extends AbstractAPI {
         httpMethod.setCompleteUrl(url,params);
     }
 
-    public PutPermStatementVO.StatementBean createStatementBean(String permission, List<String> devNumList, List<String> camNumList) {
-        PutPermStatementVO.StatementBean statementBean = new PutPermStatementVO.StatementBean();
+    public PutPolicyVO.StatementBean createStatementBean(String permission, List<String> devNumList, List<String> camNumList) {
+        PutPolicyVO.StatementBean statementBean = new PutPolicyVO.StatementBean();
         statementBean.setPermission(permission);
         List<String> resList = new ArrayList<>();
         if(devNumList!=null){

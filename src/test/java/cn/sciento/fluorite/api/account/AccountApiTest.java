@@ -99,14 +99,16 @@ class AccountApiTest {
 
     /**
      * 授权测试
+     * 注意：这里json字段首字母大写很重要
      * @throws IOException
      */
+
     @Test
     void executeApi5() throws IOException {
         List<String> devList = new ArrayList<>();
         devList.add("D59433456");
-        PutAccountPermStatementApi putAccountPermStatementApi = new PutAccountPermStatementApi(token,"0e2406c2cc564dbc9752d2609f6680b6","Get,Update,Real,Replay",devList,null);
-        BasicResponse basicResponse = putAccountPermStatementApi.executeApi();
+        PutAccountPolicyApi putAccountPolicyApi = new PutAccountPolicyApi(token,"0e2406c2cc564dbc9752d2609f6680b6","Get,Update,Real,Replay",devList,null);
+        BasicResponse basicResponse = putAccountPolicyApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
     }

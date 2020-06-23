@@ -9,7 +9,7 @@ import java.util.List;
  * @date: 10:16 2020/6/23
  * @author: leaf
  **/
-public class PutPermStatementVO {
+public class PutPolicyVO {
     @JSONField(name = "Statement")
     private List<StatementBean> Statement;
 
