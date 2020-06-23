@@ -17,20 +17,26 @@ import java.util.Map;
 /**
  * Api文档:http://open.ys7.com/doc/zh/book/index/account-api.html
  */
-public class CreateAccountApi extends AbstractAPI {
+public class DelSubAccountStatementApi extends AbstractAPI {
 
+    /**
+     * 子账号id
+     */
+    private String accountId;
+    /**
+     * 设备序列号
+     */
+    private String deviceSerial;
+    /**
+     * 请求方式
+     */
+    private HttpPostMethod httpMethod;
 
-    private String accountName;//子账号名称
-    private String password;//子账号密码[LowerCase(MD5(AppKey#密码明文))：对AppKey、#和明文密码拼接起来的字符串进行MD5加密，并转成小写]
-    private HttpPostMethod httpMethod;//请求方式
-
-
-    public CreateAccountApi (String accessToken,String appkey,String accountName,String password) {
-        this.url = ServerConstant.ADD_ACCOUNT;
+    public DelSubAccountStatementApi(String accessToken, String accountId, String deviceSerial) {
+        this.url = ServerConstant.DEL_ACCOUNT_STATEMENT;
         this.accessToken = accessToken;
-        this.accountName = accountName;
-        this.password = DigestUtils.md5Hex(appkey + "#" + password).toLowerCase();
-
+        this.accountId = accountId;
+        this.deviceSerial = deviceSerial;
         HttpUtil httpUtil = new HttpUtil();
         Map<String,Object> headMap = httpUtil.setHeadMap(host,contentType);
         httpMethod = new HttpPostMethod(method);
@@ -39,11 +45,11 @@ public class CreateAccountApi extends AbstractAPI {
         if (accessToken != null) {
             params.put("accessToken",this.accessToken);
         }
-        if(accountName!=null){
-            params.put("accountName",this.accountName);
+        if(accountId!=null){
+            params.put("accountId",this.accountId);
         }
-        if(password!=null){
-            params.put("password",this.password);
+        if(deviceSerial!=null){
+            params.put("deviceSerial",this.deviceSerial);
         }
         httpMethod.setCompleteUrl(url,params);
     }
@@ -51,7 +57,6 @@ public class CreateAccountApi extends AbstractAPI {
     public BasicResponse<CreateAccountResponse> executeApi() {
         BasicResponse response = null;
         HttpResponse httpResponse = httpMethod.execute();
-
         try {
             response = JSON.parseObject(httpResponse.getEntity().getContent(),BasicResponse.class);
         } catch (IOException e) {
@@ -64,6 +69,5 @@ public class CreateAccountApi extends AbstractAPI {
         }
         return response;
     }
-
 
 }

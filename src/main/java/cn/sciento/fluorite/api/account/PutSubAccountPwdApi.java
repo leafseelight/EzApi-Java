@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Api文档:http://open.ys7.com/doc/zh/book/index/account-api.html
  */
-public class PutAccountPwdApi extends AbstractAPI {
+public class PutSubAccountPwdApi extends AbstractAPI {
 
 
     private String accountId;//子账号名称
@@ -25,7 +25,7 @@ public class PutAccountPwdApi extends AbstractAPI {
     private HttpPostMethod httpMethod;//请求方式
 
 
-    public PutAccountPwdApi(String accessToken, String appkey,String accountId, String oldPassword, String newPassword) {
+    public PutSubAccountPwdApi(String accessToken, String appkey, String accountId, String oldPassword, String newPassword) {
         this.url = ServerConstant.PUT_ACCOUNT_PWD;
         this.accessToken = accessToken;
         this.accountId = accountId;

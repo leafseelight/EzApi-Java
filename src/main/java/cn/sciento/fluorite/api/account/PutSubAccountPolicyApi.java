@@ -20,7 +20,7 @@ import java.util.Map;
  * Api文档:http://open.ys7.com/doc/zh/book/index/account-api.html
  *
  */
-public class PutAccountPolicyApi extends AbstractAPI {
+public class PutSubAccountPolicyApi extends AbstractAPI {
     /**
      * 子账号id
      */
@@ -42,7 +42,7 @@ public class PutAccountPolicyApi extends AbstractAPI {
      * @param devNumList ["469631729"]
      * @param camNumList ["544229080"]
      */
-    public PutAccountPolicyApi(String accessToken, String accountId, String permission, List<String> devNumList, List<String> camNumList) {
+    public PutSubAccountPolicyApi(String accessToken, String accountId, String permission, List<String> devNumList, List<String> camNumList) {
         this.url = ServerConstant.PUT_ACCOUNT_POLICY;
         this.accessToken = accessToken;
         this.accountId = accountId;
@@ -69,7 +69,7 @@ public class PutAccountPolicyApi extends AbstractAPI {
         httpMethod.setCompleteUrl(url,params);
     }
 
-    public PutAccountPolicyApi(String accessToken, String accountId, List<PutPolicyVO.StatementBean> statementList) {
+    public PutSubAccountPolicyApi(String accessToken, String accountId, List<PutPolicyVO.StatementBean> statementList) {
         this.url = ServerConstant.PUT_ACCOUNT_POLICY;
         this.accessToken = accessToken;
         this.accountId = accountId;

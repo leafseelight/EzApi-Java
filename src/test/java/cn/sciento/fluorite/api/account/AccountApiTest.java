@@ -54,8 +54,8 @@ class AccountApiTest {
      */
     @Test
     void executeApi1() throws IOException {
-        CreateAccountApi createAccountApi = new CreateAccountApi(token,appKey,"light1","123456");
-        BasicResponse<CreateAccountResponse> basicResponse = createAccountApi.executeApi();
+        CreateSubAccountApi createSubAccountApi = new CreateSubAccountApi(token,appKey,"light1","123456");
+        BasicResponse<CreateAccountResponse> basicResponse = createSubAccountApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
         //{"code":"200","data":{"accountId":"0e2406c2cc564dbc9752d2609f6680b6"},"msg":"操作成功!"}
@@ -67,8 +67,8 @@ class AccountApiTest {
      */
     @Test
     void executeApi2() throws IOException {
-        GetAccountInfoApi getAccountInfoApi = new GetAccountInfoApi(token,"0e2406c2cc564dbc9752d2609f6680b6","light1");
-        BasicResponse<AccountInfoResponse> basicResponse = getAccountInfoApi.executeApi();
+        GetSubAccountInfoApi getSubAccountInfoApi = new GetSubAccountInfoApi(token,"0e2406c2cc564dbc9752d2609f6680b6","light1");
+        BasicResponse<AccountInfoResponse> basicResponse = getSubAccountInfoApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
     }
@@ -79,8 +79,8 @@ class AccountApiTest {
      */
     @Test
     void executeApi3() throws IOException {
-        GetAccountListApi getAccountListApi = new GetAccountListApi(token,0,20);
-        BasicResponse<List<AccountInfoResponse>> basicResponse = getAccountListApi.executeApi();
+        GetSubAccountListApi getSubAccountListApi = new GetSubAccountListApi(token,0,20);
+        BasicResponse<List<AccountInfoResponse>> basicResponse = getSubAccountListApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
     }
@@ -91,8 +91,8 @@ class AccountApiTest {
      */
     @Test
     void executeApi4() throws IOException {
-        PutAccountPwdApi putAccountPwdApi = new PutAccountPwdApi(token,appKey,"0e2406c2cc564dbc9752d2609f6680b6","123456","111111");
-        BasicResponse basicResponse = putAccountPwdApi.executeApi();
+        PutSubAccountPwdApi putSubAccountPwdApi = new PutSubAccountPwdApi(token,appKey,"0e2406c2cc564dbc9752d2609f6680b6","123456","111111");
+        BasicResponse basicResponse = putSubAccountPwdApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
     }
@@ -102,14 +102,45 @@ class AccountApiTest {
      * 注意：这里json字段首字母大写很重要
      * @throws IOException
      */
-
     @Test
     void executeApi5() throws IOException {
         List<String> devList = new ArrayList<>();
         devList.add("D59433456");
-        PutAccountPolicyApi putAccountPolicyApi = new PutAccountPolicyApi(token,"0e2406c2cc564dbc9752d2609f6680b6","Get,Update,Real,Replay",devList,null);
-        BasicResponse basicResponse = putAccountPolicyApi.executeApi();
+        PutSubAccountPolicyApi putSubAccountPolicyApi = new PutSubAccountPolicyApi(token,"0e2406c2cc564dbc9752d2609f6680b6","Get,Update,Real,Replay",devList,null);
+        BasicResponse basicResponse = putSubAccountPolicyApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
     }
+
+    /**
+     * 授权增加
+     * 注意：这里json字段首字母大写很重要
+     * @throws IOException
+     */
+    @Test
+    void executeApi6() throws IOException {
+        List<String> devList = new ArrayList<>();
+        devList.add("D59433456");
+        PutSubAccountStatementApi putSubAccountStatementApi = new PutSubAccountStatementApi(token,"0e2406c2cc564dbc9752d2609f6680b6","Get",devList,null);
+        BasicResponse basicResponse = putSubAccountStatementApi.executeApi();
+        System.out.println(JSON.toJSONString(basicResponse));
+        assertEquals(basicResponse.getCode(),StatusConstant.OK);
+    }
+
+    /**
+     * 删除子账号的授权
+     * 注意：这里json字段首字母大写很重要
+     * @throws IOException
+     */
+    @Test
+    void executeApi7() throws IOException {
+        DelSubAccountStatementApi delSubAccountStatementApi = new DelSubAccountStatementApi(token,"0e2406c2cc564dbc9752d2609f6680b6","D59433456");
+        BasicResponse basicResponse = delSubAccountStatementApi.executeApi();
+        System.out.println(JSON.toJSONString(basicResponse));
+        assertEquals(basicResponse.getCode(),StatusConstant.OK);
+    }
+
+
+
+
 }
