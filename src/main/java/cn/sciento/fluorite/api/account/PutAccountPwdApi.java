@@ -4,7 +4,6 @@ import cn.sciento.fluorite.api.AbstractAPI;
 import cn.sciento.fluorite.constants.ServerConstant;
 import cn.sciento.fluorite.http.HttpPostMethod;
 import cn.sciento.fluorite.response.BasicResponse;
-import cn.sciento.fluorite.response.account.CreateAccountResponse;
 import cn.sciento.fluorite.utils.DigestUtils;
 import cn.sciento.fluorite.utils.HttpUtil;
 import com.alibaba.fastjson.JSON;
@@ -27,7 +26,7 @@ public class PutAccountPwdApi extends AbstractAPI {
 
 
     public PutAccountPwdApi(String accessToken, String appkey,String accountId, String oldPassword, String newPassword) {
-        this.url = ServerConstant.ADD_ACCOUNT;
+        this.url = ServerConstant.PUT_ACCOUNT_PWD;
         this.accessToken = accessToken;
         this.accountId = accountId;
         this.oldPassword = DigestUtils.md5Hex(appkey + "#" + oldPassword).toLowerCase();
@@ -41,11 +40,14 @@ public class PutAccountPwdApi extends AbstractAPI {
         if (accessToken != null) {
             params.put("accessToken",this.accessToken);
         }
+        if (accountId != null) {
+            params.put("accountId",this.accountId);
+        }
         if(oldPassword!=null){
             params.put("oldPassword",this.oldPassword);
         }
         if(newPassword!=null){
-            params.put("password",this.newPassword);
+            params.put("newPassword",this.newPassword);
         }
         httpMethod.setCompleteUrl(url,params);
     }

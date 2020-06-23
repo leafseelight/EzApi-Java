@@ -1,10 +1,7 @@
 package cn.sciento.fluorite.api.account;
 
 
-import cn.sciento.fluorite.api.device.query.GetDeviceInfoApi;
-import cn.sciento.fluorite.api.device.query.GetDeviceListApi;
 import cn.sciento.fluorite.api.token.GetToken;
-import cn.sciento.fluorite.api.weblive.OpenLive;
 import cn.sciento.fluorite.constants.StatusConstant;
 import cn.sciento.fluorite.response.*;
 import cn.sciento.fluorite.response.account.AccountInfoResponse;
@@ -17,13 +14,10 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 class AccountApiTest {
 
@@ -86,6 +80,18 @@ class AccountApiTest {
     void executeApi3() throws IOException {
         GetAccountListApi getAccountListApi = new GetAccountListApi(token,0,20);
         BasicResponse<List<AccountInfoResponse>> basicResponse = getAccountListApi.executeApi();
+        System.out.println(JSON.toJSONString(basicResponse));
+        assertEquals(basicResponse.getCode(),StatusConstant.OK);
+    }
+
+    /**
+     * 修改密码测试
+     * @throws IOException
+     */
+    @Test
+    void executeApi4() throws IOException {
+        PutAccountPwdApi putAccountPwdApi = new PutAccountPwdApi(token,appKey,"0e2406c2cc564dbc9752d2609f6680b6","123456","111111");
+        BasicResponse basicResponse = putAccountPwdApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
     }

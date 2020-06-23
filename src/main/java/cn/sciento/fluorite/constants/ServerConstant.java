@@ -39,6 +39,6 @@ public interface ServerConstant {
     String ADD_ACCOUNT = "https://open.ys7.com/api/lapp/ram/account/create";
     String GET_ACCOUNT_INFO = "https://open.ys7.com/api/lapp/ram/account/get";
     String GET_ACCOUNT_LIST = "https://open.ys7.com/api/lapp/ram/account/list";
-    String UPDATE_ACCOUNT_PASSWORD = "https://open.ys7.com/api/lapp/ram/account/updatePassword";
+    String PUT_ACCOUNT_PWD = "https://open.ys7.com/api/lapp/ram/account/updatePassword";
 
 }
