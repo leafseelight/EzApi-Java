@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -92,6 +93,20 @@ class AccountApiTest {
     void executeApi4() throws IOException {
         PutAccountPwdApi putAccountPwdApi = new PutAccountPwdApi(token,appKey,"0e2406c2cc564dbc9752d2609f6680b6","123456","111111");
         BasicResponse basicResponse = putAccountPwdApi.executeApi();
+        System.out.println(JSON.toJSONString(basicResponse));
+        assertEquals(basicResponse.getCode(),StatusConstant.OK);
+    }
+
+    /**
+     * 授权测试
+     * @throws IOException
+     */
+    @Test
+    void executeApi5() throws IOException {
+        List<String> devList = new ArrayList<>();
+        devList.add("D59433456");
+        PutAccountPermStatementApi putAccountPermStatementApi = new PutAccountPermStatementApi(token,"0e2406c2cc564dbc9752d2609f6680b6","Get,Update,Real,Replay",devList,null);
+        BasicResponse basicResponse = putAccountPermStatementApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
     }

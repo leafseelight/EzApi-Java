@@ -5,8 +5,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.*;
 import org.apache.http.impl.client.CloseableHttpClient;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Set;
 
@@ -65,9 +67,14 @@ public abstract class BasicHttpMethod implements RequestInfo {
             int size = entries.size();
             int index = 0;
             for (Map.Entry<String,Object> entry : entries) {
-                url += entry.getKey() + "=" + entry.getValue();
-                if(++index < size)
+                try {
+                    url += entry.getKey() + "=" + URLEncoder.encode(String.valueOf(entry.getValue()),"UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
+                if(++index < size) {
                     url += "&";
+                }
             }
         }
         try {

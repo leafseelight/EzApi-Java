@@ -56,8 +56,6 @@ class DeviceApiTest {
 
     }
 
-
-
     /**
      *获取设备列表
      * @throws IOException
