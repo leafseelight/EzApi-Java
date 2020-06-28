@@ -26,7 +26,7 @@ public class CreateSubAccountApi extends AbstractAPI {
 
 
     public CreateSubAccountApi(String accessToken, String appkey, String accountName, String password) {
-        this.url = ServerConstant.ADD_ACCOUNT;
+        this.url = ServerConstant.ADD_SUBACCOUNT;
         this.accessToken = accessToken;
         this.accountName = accountName;
         this.password = DigestUtils.md5Hex(appkey + "#" + password).toLowerCase();

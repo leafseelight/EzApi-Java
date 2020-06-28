@@ -43,7 +43,7 @@ public class PutSubAccountStatementApi extends AbstractAPI {
      * @param camNumList ["544229080"]
      */
     public PutSubAccountStatementApi(String accessToken, String accountId, String permission, List<String> devNumList, List<String> camNumList) {
-        this.url = ServerConstant.ADD_ACCOUNT_STATEMENT;
+        this.url = ServerConstant.ADD_SUBACCOUNT_STATEMENT;
         this.accessToken = accessToken;
         this.accountId = accountId;
         PutPolicyVO.StatementBean statementBean = createStatementBean(permission, devNumList, camNumList);

@@ -5,8 +5,6 @@ import cn.sciento.fluorite.constants.ServerConstant;
 import cn.sciento.fluorite.http.HttpPostMethod;
 import cn.sciento.fluorite.response.BasicResponse;
 import cn.sciento.fluorite.response.account.AccountInfoResponse;
-import cn.sciento.fluorite.response.account.CreateAccountResponse;
-import cn.sciento.fluorite.utils.DigestUtils;
 import cn.sciento.fluorite.utils.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.http.HttpResponse;
@@ -26,7 +24,7 @@ public class GetSubAccountInfoApi extends AbstractAPI {
     private HttpPostMethod httpMethod;//请求方式
 
     public GetSubAccountInfoApi(String accessToken, String accountId, String accountName) {
-        this.url = ServerConstant.GET_ACCOUNT_INFO;
+        this.url = ServerConstant.GET_SUBACCOUNT_INFO;
         this.accessToken = accessToken;
         this.accountId = accountId;
         this.accountName = accountName;

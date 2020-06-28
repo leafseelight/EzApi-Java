@@ -43,7 +43,7 @@ public class PutSubAccountPolicyApi extends AbstractAPI {
      * @param camNumList ["544229080"]
      */
     public PutSubAccountPolicyApi(String accessToken, String accountId, String permission, List<String> devNumList, List<String> camNumList) {
-        this.url = ServerConstant.PUT_ACCOUNT_POLICY;
+        this.url = ServerConstant.PUT_SUBACCOUNT_POLICY;
         this.accessToken = accessToken;
         this.accountId = accountId;
         PutPolicyVO putPolicyVO = new PutPolicyVO();
@@ -70,7 +70,7 @@ public class PutSubAccountPolicyApi extends AbstractAPI {
     }
 
     public PutSubAccountPolicyApi(String accessToken, String accountId, List<PutPolicyVO.StatementBean> statementList) {
-        this.url = ServerConstant.PUT_ACCOUNT_POLICY;
+        this.url = ServerConstant.PUT_SUBACCOUNT_POLICY;
         this.accessToken = accessToken;
         this.accountId = accountId;
         PutPolicyVO putPolicyVO = new PutPolicyVO();

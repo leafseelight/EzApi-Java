@@ -54,7 +54,7 @@ class AccountApiTest {
      */
     @Test
     void executeApi1() throws IOException {
-        CreateSubAccountApi createSubAccountApi = new CreateSubAccountApi(token,appKey,"light1","123456");
+        CreateSubAccountApi createSubAccountApi = new CreateSubAccountApi(token,appKey,"light2","123456");
         BasicResponse<CreateAccountResponse> basicResponse = createSubAccountApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
@@ -140,6 +140,29 @@ class AccountApiTest {
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
     }
 
+    /**
+     * 获取B模式子账户accessToken
+     * @throws IOException
+     */
+    @Test
+    void executeApi8() throws IOException {
+        GetSubAccountAccessTokenApi getSubAccountAccessTokenApi = new GetSubAccountAccessTokenApi(token,"0e2406c2cc564dbc9752d2609f6680b6");
+        BasicResponse basicResponse = getSubAccountAccessTokenApi.executeApi();
+        System.out.println(JSON.toJSONString(basicResponse));
+        assertEquals(basicResponse.getCode(),StatusConstant.OK);
+    }
+
+    /**
+     * 删除子账号
+     * @throws IOException
+     */
+    @Test
+    void executeApi9() throws IOException {
+        DelSubAccountApi delSubAccountApi = new DelSubAccountApi(token,"841e9ee8806c42f791c00396a58c0759");
+        BasicResponse basicResponse = delSubAccountApi.executeApi();
+        System.out.println(JSON.toJSONString(basicResponse));
+        assertEquals(basicResponse.getCode(),StatusConstant.OK);
+    }
 
 
 

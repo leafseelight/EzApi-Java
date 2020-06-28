@@ -4,32 +4,35 @@ import cn.sciento.fluorite.api.AbstractAPI;
 import cn.sciento.fluorite.constants.ServerConstant;
 import cn.sciento.fluorite.http.HttpPostMethod;
 import cn.sciento.fluorite.response.BasicResponse;
-import cn.sciento.fluorite.response.account.AccountInfoResponse;
+import cn.sciento.fluorite.response.account.AccessTokenResponse;
+import cn.sciento.fluorite.response.account.CreateAccountResponse;
 import cn.sciento.fluorite.utils.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.http.HttpResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Api文档:http://open.ys7.com/doc/zh/book/index/account-api.html
  */
-public class GetSubAccountListApi extends AbstractAPI {
+public class GetSubAccountAccessTokenApi extends AbstractAPI {
 
+    /**
+     * 子账号id
+     */
+    private String accountId;
 
-    private int pageStart;//分页起始页，从0开始
-    private int pageSize;//分页大小，默认为10，最大为50
-    private HttpPostMethod httpMethod;//请求方式
+    /**
+     * 请求方式
+     */
+    private HttpPostMethod httpMethod;
 
-    public GetSubAccountListApi(String accessToken, int pageStart, int pageSize) {
-        this.url = ServerConstant.GET_SUBACCOUNT_LIST;
+    public GetSubAccountAccessTokenApi(String accessToken, String accountId) {
+        this.url = ServerConstant.GET_SUBACCOUNT_ACCESSTOKEN;
         this.accessToken = accessToken;
-        this.pageStart = pageStart;
-        this.pageSize = pageSize;
-
+        this.accountId = accountId;
         HttpUtil httpUtil = new HttpUtil();
         Map<String,Object> headMap = httpUtil.setHeadMap(host,contentType);
         httpMethod = new HttpPostMethod(method);
@@ -38,19 +41,15 @@ public class GetSubAccountListApi extends AbstractAPI {
         if (accessToken != null) {
             params.put("accessToken",this.accessToken);
         }
-        if(pageStart>=0){
-            params.put("pageStart",this.pageStart);
-        }
-        if(pageSize>0){
-            params.put("pageSize",this.pageSize);
+        if(accountId!=null){
+            params.put("accountId",this.accountId);
         }
         httpMethod.setCompleteUrl(url,params);
     }
 
-    public BasicResponse<List<AccountInfoResponse>> executeApi() {
+    public BasicResponse<AccessTokenResponse> executeApi() {
         BasicResponse response = null;
         HttpResponse httpResponse = httpMethod.execute();
-
         try {
             response = JSON.parseObject(httpResponse.getEntity().getContent(),BasicResponse.class);
         } catch (IOException e) {
@@ -63,6 +62,5 @@ public class GetSubAccountListApi extends AbstractAPI {
         }
         return response;
     }
-
 
 }

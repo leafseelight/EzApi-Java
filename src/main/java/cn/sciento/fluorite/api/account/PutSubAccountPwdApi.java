@@ -26,7 +26,7 @@ public class PutSubAccountPwdApi extends AbstractAPI {
 
 
     public PutSubAccountPwdApi(String accessToken, String appkey, String accountId, String oldPassword, String newPassword) {
-        this.url = ServerConstant.PUT_ACCOUNT_PWD;
+        this.url = ServerConstant.PUT_SUBACCOUNT_PWD;
         this.accessToken = accessToken;
         this.accountId = accountId;
         this.oldPassword = DigestUtils.md5Hex(appkey + "#" + oldPassword).toLowerCase();

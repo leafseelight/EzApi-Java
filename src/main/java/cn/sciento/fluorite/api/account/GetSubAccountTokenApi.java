@@ -32,7 +32,7 @@ public class GetSubAccountTokenApi extends AbstractAPI {
     private HttpPostMethod httpMethod;
 
     public GetSubAccountTokenApi(String accessToken, String accountId, String deviceSerial) {
-        this.url = ServerConstant.DEL_ACCOUNT_STATEMENT;
+        this.url = ServerConstant.DEL_SUBACCOUNT_STATEMENT;
         this.accessToken = accessToken;
         this.accountId = accountId;
         this.deviceSerial = deviceSerial;

@@ -1,5 +1,5 @@
 # 海康萤石云Java API
-基于
+基于萤石云开放平台，集成Java后台Sdk
 ## [子账号接口](https://open.ys7.com/doc/zh/book/index/account-api.html)
 ##### CreateSubAccountApi 创建子账号
 ##### GetSubAccountInfoApi 查询子账号信息

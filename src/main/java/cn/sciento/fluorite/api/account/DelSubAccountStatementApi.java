@@ -5,7 +5,6 @@ import cn.sciento.fluorite.constants.ServerConstant;
 import cn.sciento.fluorite.http.HttpPostMethod;
 import cn.sciento.fluorite.response.BasicResponse;
 import cn.sciento.fluorite.response.account.CreateAccountResponse;
-import cn.sciento.fluorite.utils.DigestUtils;
 import cn.sciento.fluorite.utils.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.http.HttpResponse;
@@ -33,7 +32,7 @@ public class DelSubAccountStatementApi extends AbstractAPI {
     private HttpPostMethod httpMethod;
 
     public DelSubAccountStatementApi(String accessToken, String accountId, String deviceSerial) {
-        this.url = ServerConstant.DEL_ACCOUNT_STATEMENT;
+        this.url = ServerConstant.DEL_SUBACCOUNT_STATEMENT;
         this.accessToken = accessToken;
         this.accountId = accountId;
         this.deviceSerial = deviceSerial;
@@ -54,7 +53,7 @@ public class DelSubAccountStatementApi extends AbstractAPI {
         httpMethod.setCompleteUrl(url,params);
     }
 
-    public BasicResponse<CreateAccountResponse> executeApi() {
+    public BasicResponse executeApi() {
         BasicResponse response = null;
         HttpResponse httpResponse = httpMethod.execute();
         try {
