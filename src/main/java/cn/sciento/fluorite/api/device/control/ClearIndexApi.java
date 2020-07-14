@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 清除预置点
  * Api文档:http://open.ys7.com/doc/zh/book/index/device_ptz.html#device_ptz-api4
  */
 public class ClearIndexApi extends AbstractAPI {
