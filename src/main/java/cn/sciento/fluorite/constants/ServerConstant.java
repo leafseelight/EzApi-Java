@@ -71,5 +71,21 @@ public interface ServerConstant {
      * 删除子账户
      */
     String DEL_SUBACCOUNT = "https://open.ys7.com/api/lapp/ram/account/delete";
+    /**
+     * 添加预置点
+     */
+    String ADD_INDEX = "https://open.ys7.com/api/lapp/device/preset/add";
+    /**
+     * 调用预置点
+     */
+    String CALL_INDEX = "https://open.ys7.com/api/lapp/device/preset/move";
+    /**
+     * 清除预置点
+     */
+    String CLEAR_INDEX = "https://open.ys7.com/api/lapp/device/preset/clear";
+    /**
+     * 查询设备能力集
+     */
+    String GET_DEVICE_Capacity = "https://open.ys7.com/api/lapp/device/capacity";
 
 }

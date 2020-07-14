@@ -20,6 +20,9 @@ import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * D97153721 漳州公司设备
+ */
 class AccountApiTest {
 
     private static String appKey;
@@ -105,7 +108,7 @@ class AccountApiTest {
     @Test
     void executeApi5() throws IOException {
         List<String> devList = new ArrayList<>();
-        devList.add("D59433456");
+        devList.add("D97153721");
         PutSubAccountPolicyApi putSubAccountPolicyApi = new PutSubAccountPolicyApi(token,"0e2406c2cc564dbc9752d2609f6680b6","Get,Update,Real,Replay",devList,null);
         BasicResponse basicResponse = putSubAccountPolicyApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
@@ -120,8 +123,9 @@ class AccountApiTest {
     @Test
     void executeApi6() throws IOException {
         List<String> devList = new ArrayList<>();
-        devList.add("D59433456");
-        PutSubAccountStatementApi putSubAccountStatementApi = new PutSubAccountStatementApi(token,"0e2406c2cc564dbc9752d2609f6680b6","Get",devList,null);
+        devList.add("D97153721");
+        //DevCtrl、Capture
+        PutSubAccountStatementApi putSubAccountStatementApi = new PutSubAccountStatementApi(token,"0e2406c2cc564dbc9752d2609f6680b6","DevCtrl",devList,null);
         BasicResponse basicResponse = putSubAccountStatementApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);
@@ -134,7 +138,7 @@ class AccountApiTest {
      */
     @Test
     void executeApi7() throws IOException {
-        DelSubAccountStatementApi delSubAccountStatementApi = new DelSubAccountStatementApi(token,"0e2406c2cc564dbc9752d2609f6680b6","D59433456");
+        DelSubAccountStatementApi delSubAccountStatementApi = new DelSubAccountStatementApi(token,"0e2406c2cc564dbc9752d2609f6680b6","D97153721");
         BasicResponse basicResponse = delSubAccountStatementApi.executeApi();
         System.out.println(JSON.toJSONString(basicResponse));
         assertEquals(basicResponse.getCode(),StatusConstant.OK);

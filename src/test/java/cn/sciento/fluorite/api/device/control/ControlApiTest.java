@@ -1,13 +1,11 @@
-package cn.sciento.fluorite.api.device;
+package cn.sciento.fluorite.api.device.control;
 
 
-import cn.sciento.fluorite.api.device.query.GetDeviceCapacityApi;
-import cn.sciento.fluorite.api.device.query.GetDeviceInfoApi;
-import cn.sciento.fluorite.api.device.query.GetDeviceListApi;
 import cn.sciento.fluorite.api.token.GetToken;
 import cn.sciento.fluorite.constants.StatusConstant;
-import cn.sciento.fluorite.response.*;
-import cn.sciento.fluorite.response.device.DeviceCapacityVO;
+import cn.sciento.fluorite.response.AccessToken;
+import cn.sciento.fluorite.response.BasicResponse;
+import cn.sciento.fluorite.response.device.AddIndexVO;
 import com.alibaba.fastjson.JSON;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,13 +14,12 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.List;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class DeviceApiTest {
+class ControlApiTest {
 
     private static String appKey;
 
@@ -32,8 +29,8 @@ class DeviceApiTest {
 
     @BeforeAll
     static void init() throws IOException {
-        URL url = DeviceApiTest.class.getClassLoader().getResource("config.properties");
-        InputStream in = DeviceApiTest.class.getClassLoader().getResourceAsStream("config.properties");
+        URL url = ControlApiTest.class.getClassLoader().getResource("config.properties");
+        InputStream in = ControlApiTest.class.getClassLoader().getResourceAsStream("config.properties");
         Properties p = new Properties();
         p.load(in);
         appKey = (String) p.get("appKey");
@@ -51,38 +48,41 @@ class DeviceApiTest {
     }
 
     /**
-     * 获取设备列表
+     * C6设备才支持
+     * 添加预置点
      *
      * @throws IOException
      */
     @Test
     void executeApi1() throws IOException {
-        GetDeviceListApi getDeviceListApi = new GetDeviceListApi(token, 0, 20);
-        BasicResponse<List<DeviceListResponse>> responseBasicResponse = getDeviceListApi.executeApi();
-        assertEquals(responseBasicResponse.getCode(), StatusConstant.OK);
+        AddIndexApi addIndexApi = new AddIndexApi(token, "D97153721", "0");
+        BasicResponse<AddIndexVO> responseBasicResponse = addIndexApi.executeApi();
         System.out.println(JSON.toJSONString(responseBasicResponse));
+        assertEquals(responseBasicResponse.getCode(), StatusConstant.OK);
     }
 
     /**
-     * 获取设备详情
+     * 调用预置点
+     *
      * @throws IOException
      */
     @Test
     void executeApi2() throws IOException {
-        GetDeviceInfoApi getDeviceInfoApi = new GetDeviceInfoApi(token, "D97153721");
-        BasicResponse<DeviceInfoResponse> responseBasicResponse = getDeviceInfoApi.executeApi();
-        assertEquals(responseBasicResponse.getCode(), StatusConstant.OK);
+        CallIndexApi callIndexApi = new CallIndexApi(token, "D97153721", "1", "1");
+        BasicResponse responseBasicResponse = callIndexApi.executeApi();
         System.out.println(JSON.toJSONString(responseBasicResponse));
+        assertEquals(responseBasicResponse.getCode(), StatusConstant.OK);
     }
 
     /**
-     * 获取设备详情
+     * 清除预置点
+     *
      * @throws IOException
      */
     @Test
     void executeApi3() throws IOException {
-        GetDeviceCapacityApi getDeviceInfoApi = new GetDeviceCapacityApi(token, "D97153721");
-        BasicResponse<DeviceCapacityVO> responseBasicResponse = getDeviceInfoApi.executeApi();
+        ClearIndexApi clearIndexApi = new ClearIndexApi(token, "D97153721", "1", "1");
+        BasicResponse responseBasicResponse = clearIndexApi.executeApi();
         System.out.println(JSON.toJSONString(responseBasicResponse));
         assertEquals(responseBasicResponse.getCode(), StatusConstant.OK);
     }
